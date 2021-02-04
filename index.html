@@ -51,7 +51,11 @@
                     <div class="mb-3">
                         <label class="form-label">Consulta</label>
                         <textarea type="text" class="form-control"
-                            placeholder="Ingrese una consulta de al menos 10 caracteres" id="consulta"></textarea>
+                            placeholder="Ingrese una consulta de al menos 10 caracteres" id="consulta" onblur="cantidadCaracteres(this)"></textarea>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">
+                                Ingrese al menos 10 caracteres
+                            </div>
                     </div>
                     <div class="mb-3 my-2">
                         <div class="form-check">
