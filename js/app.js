@@ -40,6 +40,7 @@ cantidadCaracteres = (elemento) => {
     }
 }
 
+//!
 // let checkbox = document.getElementById('checkTermino');
 // checkbox.addEventListener('change', validarCheckbox);
 
@@ -53,19 +54,35 @@ cantidadCaracteres = (elemento) => {
 //         return false;
 //     }
 // }
+//!
 
 validarGeneral = (event) => {
     event.preventDefault();
-    let alerta = document.getElementById("mensajeEnvio");
     if (campoRequerido(document.getElementById('nombre')) &&
         validarEmail(document.getElementById('email')) &&
         validarTelefono(document.getElementById('telefono')) &&
         cantidadCaracteres(document.getElementById('consulta'))
-    ) {
-        alerta.className = "alert alert-success mx-3";
-        alerta.innerHTML = "Su consulta fue enviada correctamente.";
-    } else {
-        alerta.className = "alert alert-danger mx-3";
-        alerta.innerHTML = "Ocurrio un error. Verifique los datos ingresados.";
-    }
+    ) enviarMail();
+
+}
+
+enviarMail = () => {
+    let alerta = document.getElementById("mensajeEnvio");
+    emailjs.send("service_kfwsodn", "template_iqhj5k4", {
+        from_name: "Administrador",
+        to_name: document.getElementById('email').value,
+        message: `Nombre y apellido: ${document.getElementById('nombre').value} - 
+        Telefono: ${document.getElementById('telefono').value} - 
+        Consulta: ${document.getElementById('consulta').value}`,
+    }).then(
+        (response) => {
+            console.log(response);
+            alerta.className = "alert alert-success mx-3";
+            alerta.innerHTML = "Su consulta fue enviada correctamente.";
+        }, (error) => {
+            console.log(error);
+            alerta.className = "alert alert-danger mx-3";
+            alerta.innerHTML = "Ocurrio un error. Verifique los datos ingresados.";
+        }
+    )
 }
