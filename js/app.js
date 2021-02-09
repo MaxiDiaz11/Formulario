@@ -40,30 +40,27 @@ cantidadCaracteres = (elemento) => {
     }
 }
 
-//!
-// let checkbox = document.getElementById('checkTermino');
-// checkbox.addEventListener('change', validarCheckbox);
+let checkbox = document.getElementById('checkTermino');
+checkbox.addEventListener('change', validarCheck);
 
-// validarCheckbox = () => {
-//     if (checkbox.checked) {
-//         checkbox.className = 'form-check-input is-valid';
-//         return true;
-//     }
-//     else {
-//         checkbox.className = 'form-check-input is-invalid';
-//         return false;
-//     }
-// }
-//!
+function validarCheck(){
+    if(checkbox.checked){ //if(checkbox.checked == true)
+        checkbox.className = 'form-check-input is-valid';
+        return true;
+    }else{
+        checkbox.className = 'form-check-input is-invalid';
+        return false;
+    }
+}
 
 validarGeneral = (event) => {
     event.preventDefault();
     if (campoRequerido(document.getElementById('nombre')) &&
         validarEmail(document.getElementById('email')) &&
         validarTelefono(document.getElementById('telefono')) &&
-        cantidadCaracteres(document.getElementById('consulta'))
+        cantidadCaracteres(document.getElementById('consulta')) &&
+        validarCheck()
     ) enviarMail();
-
 }
 
 enviarMail = () => {
